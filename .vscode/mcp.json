@@ -1,0 +1,29 @@
+{
+    "servers": {
+        // Run the MCP server using a Docker container with GitHub authentication
+        // Requires a GitHub Personal Access Token set as an environment variable
+        // Requires Docker to be installed and running
+        "github-with-docker": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "-e",
+                "GITHUB_PERSONAL_ACCESS_TOKEN",
+                "ghcr.io/github/github-mcp-server"
+            ],
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
+            }
+        }
+    },
+    "inputs": [
+        {
+            "id": "github_token",
+            "type": "promptString",
+            "description": "Enter your Github Personal Access Token",
+            "password": true
+        }
+    ]
+}
